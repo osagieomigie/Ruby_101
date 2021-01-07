@@ -2,5 +2,6 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
   # CRUD for users and calculations 
-  resources :users, :calculations
+  resources :users
+  resources :calculations
 end
