@@ -26,7 +26,16 @@ class UsersController < ApplicationController
         json_response(@user) # return created user, to signify that the user was created
     end 
 
+    #POST request, to update a user 
     def update
+        # retrieve user data from request (params)
+        email = params[:email]
+
+        # query DB for the specific user 
+        user = User.where(:email => email)
+
+        @user = user.update(user_params)
+        json_response(@user) # return created user, to signify that the user was created
     end 
 
     def destroy 
