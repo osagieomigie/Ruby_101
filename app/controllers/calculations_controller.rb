@@ -28,10 +28,15 @@ class CalculationsController < ApplicationController
         end 
     end 
 
+    # updates 
     def update
     end 
 
+    # delete record 
     def destroy 
+        user_id = params[:id] # get record id from request 
+        @calculation = Calculation.find_by(:id => user_id).destroy # find and delete 
+        json_response(@calculation) # respond with the users calculations
     end 
 
     private 
