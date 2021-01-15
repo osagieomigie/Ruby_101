@@ -14,7 +14,18 @@ class CalculationsController < ApplicationController
         json_response(@calculation) # respond with the users calculations
     end 
 
+    # create new user specific calculations
     def create 
+        @new_calculation = Calculation.new(calculate_params) # create Calculation OBject to store request 
+
+        # save error
+        if !@new_calculation.save
+            #respond with error message
+            json_response(@new_calculation.errors.full_messages, 400) 
+        else 
+            # respond with newly created calculation
+            json_response(@new_calculation) 
+        end 
     end 
 
     def update
@@ -22,5 +33,10 @@ class CalculationsController < ApplicationController
 
     def destroy 
     end 
-    
+
+    private 
+        # whitelist fields in params(request)
+        def calculate_params 
+            params.permit(:user_id, :step)
+        end 
 end
